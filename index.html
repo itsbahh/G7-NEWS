@@ -2,28 +2,66 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>niche bah title</title>
+  <title>School Announcements</title>
   <style>
     body { font-family: Arial, sans-serif; padding: 20px; background: #f5f5f5; }
     h1 { color: #2c3e50; }
     .announcement { background-color: #fff; padding: 15px; margin-bottom: 10px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-    .date { font-size: 0.9em; color: #888; }
+    .hidden { display: none; }
+    input { padding: 8px; width: 100px; margin-right: 5px; }
+    button { padding: 8px; }
+    .congrats { color: green; font-weight: bold; margin-top: 20px; }
   </style>
 </head>
 <body>
-  <h1>niche bah title sec</h1>
+  <h1>School Announcements</h1>
 
-  <div class="niche bah announcement sec">
-    <p class="date">Dec 67, 2025</p>
-    <strong>yo niche bah on top yo</strong>
-    <p>idk twin sybau</p>
+  <!-- PIN input -->
+  <div id="pinSection">
+    <input type="password" id="pinInput" placeholder="Enter PIN">
+    <button onclick="checkPin()">Unlock</button>
+    <p id="pinMessage" style="color:red;"></p>
   </div>
 
-  <div class="niche bah announcement sec">
-    <p class="date">Dec 67, 2025</p>
-    <strong>niche bah so niche yo</strong>
-    <p>niche baby 67 </p>
+  <!-- Announcements -->
+  <div id="announcements">
+    <div class="announcement">
+      <p class="date">Dec 2, 2025</p>
+      <strong>Science Club Meeting</strong>
+      <p>Room 12 at 3 PM</p>
+    </div>
+
+    <div class="announcement">
+      <p class="date">Dec 3, 2025</p>
+      <strong>Math Quiz on Friday</strong>
+      <p>Study chapters 5 & 6</p>
+    </div>
   </div>
 
+  <p id="congratsMessage" class="congrats hidden">Congrats!</p>
+
+  <script>
+    const correctPin = "1234"; // <- change this to your PIN
+    function checkPin() {
+      const input = document.getElementById("pinInput").value;
+      const message = document.getElementById("pinMessage");
+      const announcements = document.getElementById("announcements");
+      const congrats = document.getElementById("congratsMessage");
+
+      if(input === correctPin) {
+        // Replace all announcement content with "niche bah yo"
+        const allAnnouncements = announcements.querySelectorAll(".announcement");
+        allAnnouncements.forEach(div => {
+          div.innerHTML = '<p class="date">---</p><strong>niche bah yo</strong><p>niche bah yo</p>';
+        });
+
+        congrats.classList.remove("hidden"); // show congrats message
+        document.getElementById("pinSection").classList.add("hidden"); // hide PIN input
+        message.textContent = "";
+      } else {
+        message.textContent = "Wrong PIN, try again!";
+      }
+    }
+  </script>
 </body>
 </html>
